@@ -1,22 +1,20 @@
-# Use the latest LTS or current Node version
-FROM node:22-alpine AS base
 
-# Install required tools
-RUN apk add --no-cache git bash
+# Dockerfile
+FROM node:22-slim
 
-# Set working directory
+# Install git and bash
+RUN apt-get update && apt-get install -y git bash && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /quartz
 
-# Clone Quartz repository
-# You can pin to a specific version if you like (recommended)
+# Clone Quartz
 RUN git clone --depth 1 https://github.com/jackyzha0/quartz.git . && \
     npm install
 
-# Copy entrypoint script
+# Copy entrypoint
 COPY docker-quartz.sh /usr/local/bin/docker-quartz
 RUN chmod +x /usr/local/bin/docker-quartz
 
-# Expose port
 EXPOSE 8080
 
-ENTRYPOINT ["docker-quartz"]
+ENTRYPOINT ["/usr/local/bin/docker-quartz"]
