@@ -15,5 +15,4 @@ ln -s /vault /quartz/content
 
 # Build and serve
 cd /quartz
-npx quartz build
-npx quartz serve --port "$PORT" --hostname 0.0.0.0
+npx quartz build --serve --port "$PORT"

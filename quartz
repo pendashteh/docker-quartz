@@ -1,0 +1,18 @@
+
+#!/bin/bash
+set -e
+
+PORT=${1:-8080}
+
+# Ensure the current directory has markdown files
+if [ ! -d "$(pwd)" ]; then
+  echo "Error: not a valid directory"
+  exit 1
+fi
+
+# Run Quartz container
+docker run --rm \
+  -p ${PORT}:${PORT} \
+  -v "$(pwd)":/vault \
+  quartz-base \
+  ${PORT}
