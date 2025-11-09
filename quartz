@@ -1,6 +1,15 @@
-
 #!/bin/bash
 set -e
+
+cat <<'EOF'
+
+This command will run a docker container and maps your current directory to it.
+You may provide a port number as an option, default to 8080.
+
+EOF
+
+read -t 30 -p "Press Enter to continue or Ctrl+C to cancel (auto-continue in 30s)..." || true
+
 
 PORT=${1:-8080}
 
